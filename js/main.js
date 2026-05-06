@@ -271,6 +271,32 @@ if (canvas) {
   animateParticles();
 }
 
+// ===== OFFERS COUNTDOWN TIMER =====
+(function () {
+  const pad = n => String(n).padStart(2, '0');
+  // Count down to end of current month
+  const now = new Date();
+  const target = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0);
+
+  const els = {
+    d: document.getElementById('cdDays'),
+    h: document.getElementById('cdHours'),
+    m: document.getElementById('cdMins'),
+    s: document.getElementById('cdSecs'),
+  };
+  if (!els.d) return;
+
+  function tick() {
+    const diff = Math.max(0, target - Date.now());
+    els.d.textContent = pad(Math.floor(diff / 86400000));
+    els.h.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+    els.m.textContent = pad(Math.floor((diff % 3600000) / 60000));
+    els.s.textContent = pad(Math.floor((diff % 60000) / 1000));
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', (e) => {
