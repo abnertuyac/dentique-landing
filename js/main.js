@@ -166,37 +166,27 @@ if (testiTrack && testiPrevBtn && testiNextBtn) {
 
 
 // ===== BEFORE & AFTER DRAG COMPARE =====
-function initBA(wrapperId, beforeId, handleId) {
-  const wrapper = document.getElementById(wrapperId);
-  const before  = document.getElementById(beforeId);
-  const handle  = document.getElementById(handleId);
-  if (!wrapper || !before || !handle) return;
+function initBA(compareId, beforeImgId, handleId) {
+  const wrapper   = document.getElementById(compareId);
+  const beforeImg = document.getElementById(beforeImgId);
+  const handle    = document.getElementById(handleId);
+  if (!wrapper || !beforeImg || !handle) return;
 
-  const img = before.querySelector('.ba__before-img');
   let dragging = false;
-
-  // Always keep before-image pixel width = wrapper width so it never squishes
-  const syncImgWidth = () => {
-    if (img) img.style.width = wrapper.offsetWidth + 'px';
-  };
-  syncImgWidth();
-  window.addEventListener('resize', syncImgWidth);
 
   const move = (clientX) => {
     const rect = wrapper.getBoundingClientRect();
     let pct = (clientX - rect.left) / rect.width;
-    pct = Math.max(0.04, Math.min(0.96, pct));
-    before.style.width = (pct * 100) + '%';
-    handle.style.left  = (pct * 100) + '%';
-    syncImgWidth();
+    pct = Math.max(0.02, Math.min(0.98, pct));
+    // clip-path trims the right side — image stays 100% wide, never moves
+    beforeImg.style.clipPath = `inset(0 ${((1 - pct) * 100).toFixed(2)}% 0 0)`;
+    handle.style.left = (pct * 100).toFixed(2) + '%';
   };
 
-  // Only the handle starts the drag (not the whole image)
   handle.addEventListener('mousedown',  (e) => { e.preventDefault(); dragging = true; });
   window.addEventListener('mousemove',  (e) => { if (dragging) move(e.clientX); });
   window.addEventListener('mouseup',    ()  => { dragging = false; });
-
-  handle.addEventListener('touchstart', () => { dragging = true; }, { passive: true });
+  handle.addEventListener('touchstart', ()  => { dragging = true; }, { passive: true });
   window.addEventListener('touchmove',  (e) => { if (dragging) { e.preventDefault(); move(e.touches[0].clientX); } }, { passive: false });
   window.addEventListener('touchend',   ()  => { dragging = false; });
 }
