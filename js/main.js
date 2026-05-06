@@ -288,3 +288,144 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
+
+// ===== THEME SWITCHER =====
+const themes = {
+  gold:     { '--gold': '#c9a84c', '--gold-light': '#e4c97e', '--gold-glow': 'rgba(201,168,76,0.4)', '--gold-dim': 'rgba(201,168,76,0.15)' },
+  sapphire: { '--gold': '#4a9eff', '--gold-light': '#7ab8ff', '--gold-glow': 'rgba(74,158,255,0.4)', '--gold-dim': 'rgba(74,158,255,0.15)' },
+  emerald:  { '--gold': '#27ae78', '--gold-light': '#4ecf9a', '--gold-glow': 'rgba(39,174,120,0.4)', '--gold-dim': 'rgba(39,174,120,0.15)' },
+};
+
+function applyTheme(name) {
+  const vars = themes[name];
+  if (!vars) return;
+  const root = document.documentElement;
+  Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+  localStorage.setItem('dentiqueTheme', name);
+
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    const isActive = opt.dataset.theme === name;
+    opt.classList.toggle('active', isActive);
+    const check = opt.querySelector('.fa-check');
+    if (check) check.style.display = isActive ? 'block' : 'none';
+  });
+}
+
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+const themePanel     = document.getElementById('themePanel');
+
+if (themeToggleBtn && themePanel) {
+  themeToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    themePanel.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#themeSwitcher')) themePanel.classList.remove('open');
+  });
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      applyTheme(opt.dataset.theme);
+      themePanel.classList.remove('open');
+    });
+  });
+  // Restore saved theme
+  applyTheme(localStorage.getItem('dentiqueTheme') || 'gold');
+}
+
+
+// ===== CHATBOT =====
+const chatBubble  = document.getElementById('chatBubble');
+const chatWindow  = document.getElementById('chatWindow');
+const chatClose   = document.getElementById('chatClose');
+const chatMessages = document.getElementById('chatMessages');
+const chatInput   = document.getElementById('chatInput');
+const chatSend    = document.getElementById('chatSend');
+const quickReplies = document.getElementById('quickReplies');
+
+const botReplies = {
+  'Book appointment':    'Great! You can book an appointment by filling out our <a href="#contact" style="color:var(--gold)">contact form</a> or calling us. We\'ll get back to you within 24 hours.',
+  'Our services':        'We offer Teeth Whitening, Porcelain Veneers, Dental Implants, Orthodontics, Root Canal, Cosmetic Dentistry, and Emergency Care. Which service are you interested in?',
+  'Pricing & plans':     'We offer flexible pricing plans — from a basic plan at $49/mo to our full Premium plan at $149/mo. Check our <a href="#pricing" style="color:var(--gold)">Pricing section</a> for full details.',
+  'Before & after':      'Our gallery shows real smile transformations! Check the <a href="#beforeafter" style="color:var(--gold)">Before & After section</a> to see whitening, veneers, and orthodontic results.',
+  'Emergency dental':    'We handle dental emergencies same-day. Call us immediately and we\'ll fit you in. Knocked-out tooth? Keep it moist and come in within the hour!',
+  'Insurance accepted':  'We accept most major insurance providers including Delta Dental, Cigna, Aetna, MetLife, BlueCross, and more. Bring your card and we\'ll verify coverage for free.',
+};
+
+const defaultReplies = [
+  'Book appointment', 'Our services', 'Pricing & plans', 'Before & after',
+];
+
+function addMsg(text, who) {
+  const msg = document.createElement('div');
+  msg.className = `chat-msg chat-msg--${who}`;
+  if (who === 'bot') {
+    msg.innerHTML = `<div class="chat-msg__av"><i class="fas fa-tooth"></i></div><div class="chat-msg__bubble">${text}</div>`;
+  } else {
+    msg.innerHTML = `<div class="chat-msg__bubble">${text}</div>`;
+  }
+  chatMessages.appendChild(msg);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function showTyping() {
+  const t = document.createElement('div');
+  t.className = 'chat-msg chat-msg--bot';
+  t.id = 'typingIndicator';
+  t.innerHTML = `<div class="chat-msg__av"><i class="fas fa-tooth"></i></div><div class="typing-bubble"><span></span><span></span><span></span></div>`;
+  chatMessages.appendChild(t);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+function buildQuickReplies(list) {
+  quickReplies.innerHTML = '';
+  list.forEach(label => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-reply';
+    btn.textContent = label;
+    btn.addEventListener('click', () => handleUserMsg(label));
+    quickReplies.appendChild(btn);
+  });
+}
+
+function handleUserMsg(text) {
+  addMsg(text, 'user');
+  quickReplies.innerHTML = '';
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    const reply = botReplies[text] || 'Thanks for reaching out! Our team will get back to you shortly. You can also <a href="#contact" style="color:var(--gold)">send us a message</a> directly.';
+    addMsg(reply, 'bot');
+    buildQuickReplies(defaultReplies);
+  }, 900);
+}
+
+if (chatBubble && chatWindow && chatClose && chatMessages) {
+  chatBubble.addEventListener('click', () => {
+    chatWindow.classList.toggle('open');
+    const badge = chatBubble.querySelector('.chatbot__badge');
+    if (badge) badge.style.display = 'none';
+    // Show greeting on first open
+    if (!chatMessages.dataset.greeted) {
+      chatMessages.dataset.greeted = '1';
+      setTimeout(() => addMsg('👋 Hello! Welcome to <strong>Dentique</strong>. How can we help your smile today?', 'bot'), 300);
+      setTimeout(() => buildQuickReplies(defaultReplies), 700);
+    }
+  });
+
+  chatClose.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+  function sendChatMsg() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    chatInput.value = '';
+    handleUserMsg(text);
+  }
+
+  chatSend.addEventListener('click', sendChatMsg);
+  chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendChatMsg(); });
+}
