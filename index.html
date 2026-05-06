@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dentique — Premium Dental Care</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <div class="nav__logo">Dentique</div>
+    <ul class="nav__links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn btn--gold nav__cta">Book Now</a>
+    <button class="nav__toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#services" onclick="closeMobile()">Services</a></li>
+      <li><a href="#about" onclick="closeMobile()">About</a></li>
+      <li><a href="#why-us" onclick="closeMobile()">Why Us</a></li>
+      <li><a href="#testimonials" onclick="closeMobile()">Testimonials</a></li>
+      <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
+      <li><a href="#contact" class="btn btn--gold" onclick="closeMobile()">Book Now</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <span class="hero__tag">Premium Dental Care</span>
+      <h1 class="hero__title">Your Smile Deserves <br /><span class="gold">the Best.</span></h1>
+      <p class="hero__sub">World-class dental treatments delivered with precision, comfort, and elegance.</p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--gold">Book an Appointment</a>
+        <a href="#services" class="btn btn--outline">Our Services</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll Down</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stats__grid">
+      <div class="stat">
+        <h3 class="stat__num gold">15+</h3>
+        <p>Years of Experience</p>
+      </div>
+      <div class="stat">
+        <h3 class="stat__num gold">8,500+</h3>
+        <p>Happy Patients</p>
+      </div>
+      <div class="stat">
+        <h3 class="stat__num gold">20+</h3>
+        <p>Dental Specialists</p>
+      </div>
+      <div class="stat">
+        <h3 class="stat__num gold">99%</h3>
+        <p>Satisfaction Rate</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">What We Offer</span>
+        <h2 class="section__title">Our <span class="gold">Services</span></h2>
+        <p class="section__sub">From routine cleanings to full smile transformations — we do it all.</p>
+      </div>
+      <div class="services__grid">
+        <div class="service-card">
+          <div class="service-card__icon"><i class="fas fa-tooth"></i></div>
+          <h3>General Dentistry</h3>
+          <p>Comprehensive checkups, cleanings, fillings, and preventive care to keep your teeth healthy.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon"><i class="fas fa-star"></i></div>
+          <h3>Teeth Whitening</h3>
+          <p>Professional-grade whitening treatments that deliver a brighter, whiter smile in one visit.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon"><i class="fas fa-magic"></i></div>
+          <h3>Cosmetic Dentistry</h3>
+          <p>Veneers, bonding, and smile makeovers crafted to give you the perfect aesthetic smile.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon"><i class="fas fa-align-center"></i></div>
+          <h3>Orthodontics</h3>
+          <p>Traditional braces and clear aligners to straighten your teeth discreetly and effectively.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon"><i class="fas fa-circle"></i></div>
+          <h3>Dental Implants</h3>
+          <p>Permanent, natural-looking implants that restore your smile and confidence completely.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Emergency Care</h3>
+          <p>Same-day emergency appointments available to relieve pain and protect your oral health fast.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="container about__grid">
+      <div class="about__image">
+        <div class="about__img-placeholder">
+          <i class="fas fa-user-md"></i>
+        </div>
+        <div class="about__badge">
+          <span class="gold">15+</span>
+          <p>Years of Excellence</p>
+        </div>
+      </div>
+      <div class="about__content">
+        <span class="section__tag">About Dentique</span>
+        <h2 class="section__title">Crafting Beautiful <span class="gold">Smiles</span> Since 2009</h2>
+        <p>At Dentique, we combine cutting-edge dental technology with a warm, patient-first approach. Our team of specialists is dedicated to providing treatments that are as comfortable as they are effective.</p>
+        <p>We believe that a healthy smile is a reflection of overall well-being. That's why we take the time to understand each patient's unique needs and craft personalized treatment plans.</p>
+        <ul class="about__list">
+          <li><i class="fas fa-check-circle gold"></i> Board-certified dental specialists</li>
+          <li><i class="fas fa-check-circle gold"></i> State-of-the-art digital X-rays & 3D imaging</li>
+          <li><i class="fas fa-check-circle gold"></i> Sedation dentistry for anxious patients</li>
+          <li><i class="fas fa-check-circle gold"></i> Flexible payment plans available</li>
+        </ul>
+        <a href="#contact" class="btn btn--gold">Meet Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-us section" id="why-us">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Why Choose Us</span>
+        <h2 class="section__title">The <span class="gold">Dentique</span> Difference</h2>
+        <p class="section__sub">We go beyond dentistry — we deliver an experience.</p>
+      </div>
+      <div class="why-us__grid">
+        <div class="why-card">
+          <i class="fas fa-crown gold"></i>
+          <h3>Luxury Experience</h3>
+          <p>From the moment you walk in, enjoy a calm, upscale environment designed to ease your visit.</p>
+        </div>
+        <div class="why-card">
+          <i class="fas fa-microscope gold"></i>
+          <h3>Advanced Technology</h3>
+          <p>We use the latest dental technology for precise diagnostics and minimally invasive treatments.</p>
+        </div>
+        <div class="why-card">
+          <i class="fas fa-clock gold"></i>
+          <h3>On-Time Appointments</h3>
+          <p>We respect your time. Our clinic runs on schedule so you're never waiting too long.</p>
+        </div>
+        <div class="why-card">
+          <i class="fas fa-heart gold"></i>
+          <h3>Patient-Centered Care</h3>
+          <p>Your comfort and concerns come first. We listen, explain, and treat with full transparency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials section" id="testimonials">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Patient Stories</span>
+        <h2 class="section__title">What Our <span class="gold">Patients</span> Say</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p>"Dentique completely transformed my smile. The veneers look so natural and the entire process was seamless. I couldn't be happier!"</p>
+          <div class="testimonial-card__author">
+            <div class="author__avatar">SM</div>
+            <div>
+              <strong>Sarah M.</strong>
+              <span>Cosmetic Patient</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p>"I had extreme dental anxiety but the team at Dentique made me feel completely at ease. Best dental experience I've ever had."</p>
+          <div class="testimonial-card__author">
+            <div class="author__avatar">JR</div>
+            <div>
+              <strong>James R.</strong>
+              <span>General Patient</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p>"My implants look and feel just like real teeth. The results exceeded my expectations. Dentique is truly world-class."</p>
+          <div class="testimonial-card__author">
+            <div class="author__avatar">AL</div>
+            <div>
+              <strong>Ana L.</strong>
+              <span>Implant Patient</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact section" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__info">
+        <span class="section__tag">Get In Touch</span>
+        <h2 class="section__title">Book Your <span class="gold">Appointment</span></h2>
+        <p>Ready for a healthier, more beautiful smile? Contact us today and our team will get back to you within 24 hours.</p>
+        <ul class="contact__details">
+          <li><i class="fas fa-map-marker-alt gold"></i> 123 Smile Avenue, Suite 100, New York, NY</li>
+          <li><i class="fas fa-phone gold"></i> +1 (555) 123-4567</li>
+          <li><i class="fas fa-envelope gold"></i> hello@dentique.com</li>
+          <li><i class="fas fa-clock gold"></i> Mon–Fri: 8am–7pm | Sat: 9am–4pm</li>
+        </ul>
+      </div>
+      <form class="contact__form" id="contactForm">
+        <div class="form__row">
+          <div class="form__group">
+            <label>First Name</label>
+            <input type="text" placeholder="John" required />
+          </div>
+          <div class="form__group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Doe" required />
+          </div>
+        </div>
+        <div class="form__group">
+          <label>Email Address</label>
+          <input type="email" placeholder="john@example.com" required />
+        </div>
+        <div class="form__group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+1 (555) 000-0000" />
+        </div>
+        <div class="form__group">
+          <label>Service Interested In</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>General Dentistry</option>
+            <option>Teeth Whitening</option>
+            <option>Cosmetic Dentistry</option>
+            <option>Orthodontics</option>
+            <option>Dental Implants</option>
+            <option>Emergency Care</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label>Message</label>
+          <textarea rows="4" placeholder="Tell us about your dental concerns..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--gold btn--full">Send Message</button>
+        <p class="form__success" id="formSuccess">Thank you! We'll be in touch soon.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <h3 class="gold">Dentique</h3>
+        <p>Premium dental care for a lifetime of beautiful smiles.</p>
+        <div class="footer__socials">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">General Dentistry</a></li>
+          <li><a href="#services">Teeth Whitening</a></li>
+          <li><a href="#services">Cosmetic Dentistry</a></li>
+          <li><a href="#services">Orthodontics</a></li>
+          <li><a href="#services">Dental Implants</a></li>
+        </ul>
+      </div>
+      <div class="footer__links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#why-us">Why Choose Us</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Book Appointment</a></li>
+        </ul>
+      </div>
+      <div class="footer__links">
+        <h4>Contact</h4>
+        <ul>
+          <li>123 Smile Avenue, NY</li>
+          <li>+1 (555) 123-4567</li>
+          <li>hello@dentique.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2024 Dentique. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
