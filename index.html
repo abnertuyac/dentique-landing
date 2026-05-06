@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dentique — Premium Dental Care</title>
+  <meta name="description" content="Dentique offers world-class dental care — teeth whitening, veneers, implants, orthodontics, and more. Book your appointment today." />
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -22,6 +23,7 @@
       <li><a href="#team">Team</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#beforeafter">Before & After</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="btn btn--gold nav__cta">Book Now</a>
@@ -45,7 +47,7 @@
   <!-- HERO -->
   <section class="hero" id="home">
     <canvas class="hero__particles" id="particles"></canvas>
-    <div class="hero__overlay"></div>
+    <div class="hero__overlay" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=85');"></div>
     <div class="hero__content">
       <span class="hero__tag">Premium Dental Care</span>
       <h1 class="hero__title">Your Smile Deserves <br /><span class="gold">the Best.</span></h1>
@@ -83,6 +85,49 @@
     </div>
   </section>
 
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span><i class="fas fa-star gold"></i> Trusted by 8,500+ Patients</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-crown gold"></i> 15+ Years of Excellence</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-certificate gold"></i> Board-Certified Specialists</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-shield-alt gold"></i> 99% Satisfaction Rate</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-bolt gold"></i> Same-Day Emergency Care</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-credit-card gold"></i> Flexible Payment Plans</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-microscope gold"></i> Advanced 3D Imaging</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-users gold"></i> Family-Friendly Clinic</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="marquee-content" aria-hidden="true">
+        <span><i class="fas fa-star gold"></i> Trusted by 8,500+ Patients</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-crown gold"></i> 15+ Years of Excellence</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-certificate gold"></i> Board-Certified Specialists</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-shield-alt gold"></i> 99% Satisfaction Rate</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-bolt gold"></i> Same-Day Emergency Care</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-credit-card gold"></i> Flexible Payment Plans</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-microscope gold"></i> Advanced 3D Imaging</span>
+        <span class="marquee-dot">✦</span>
+        <span><i class="fas fa-users gold"></i> Family-Friendly Clinic</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+    </div>
+  </div>
+
   <!-- SERVICES -->
   <section class="services section" id="services">
     <div class="container">
@@ -111,13 +156,13 @@
           <span class="service-card__link">Learn more <i class="fas fa-arrow-right"></i></span>
         </div>
         <div class="service-card fade-up">
-          <div class="service-card__icon"><i class="fas fa-align-center"></i></div>
+          <div class="service-card__icon"><i class="fas fa-sliders"></i></div>
           <h3>Orthodontics</h3>
           <p>Traditional braces and clear aligners to straighten your teeth discreetly and effectively.</p>
           <span class="service-card__link">Learn more <i class="fas fa-arrow-right"></i></span>
         </div>
         <div class="service-card fade-up">
-          <div class="service-card__icon"><i class="fas fa-circle"></i></div>
+          <div class="service-card__icon"><i class="fas fa-circle-dot"></i></div>
           <h3>Dental Implants</h3>
           <p>Permanent, natural-looking implants that restore your smile and confidence completely.</p>
           <span class="service-card__link">Learn more <i class="fas fa-arrow-right"></i></span>
@@ -129,6 +174,82 @@
           <span class="service-card__link">Learn more <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE GALLERY -->
+  <section class="showcase section" id="showcase">
+    <div class="container">
+      <div class="section__header fade-up">
+        <span class="section__tag">Our Work</span>
+        <h2 class="section__title">Real Smiles, <span class="gold">Real Results</span></h2>
+        <p class="section__sub">A glimpse into the work we do every day — transforming lives, one smile at a time.</p>
+      </div>
+    </div>
+
+    <div class="showcase__slider fade-up">
+      <div class="showcase__track" id="showcaseTrack">
+
+        <div class="showcase__slide">
+          <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1200&q=85" alt="Perfect smile result" />
+          <div class="showcase__caption">
+            <span class="gold">Smile Makeover</span>
+            <p>Full cosmetic transformation — veneers & whitening combined for a radiant result.</p>
+          </div>
+        </div>
+
+        <div class="showcase__slide">
+          <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1200&q=85" alt="Dental clinic interior" />
+          <div class="showcase__caption">
+            <span class="gold">Our Clinic</span>
+            <p>State-of-the-art facility designed for patient comfort and clinical excellence.</p>
+          </div>
+        </div>
+
+        <div class="showcase__slide">
+          <img src="https://images.unsplash.com/photo-1588776814546-1ffbb5b7f8a1?w=1200&q=85" alt="Dentist at work" />
+          <div class="showcase__caption">
+            <span class="gold">Precision Care</span>
+            <p>Our specialists bring years of expertise to every procedure, large or small.</p>
+          </div>
+        </div>
+
+        <div class="showcase__slide">
+          <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=1200&q=85" alt="Happy patient smiling" />
+          <div class="showcase__caption">
+            <span class="gold">Happy Patients</span>
+            <p>Confidence restored. Our patients leave every visit with a reason to smile.</p>
+          </div>
+        </div>
+
+        <div class="showcase__slide">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=85" alt="Family dental care" />
+          <div class="showcase__caption">
+            <span class="gold">Family Care</span>
+            <p>From children to seniors — we care for the whole family under one roof.</p>
+          </div>
+        </div>
+
+        <div class="showcase__slide">
+          <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=1200&q=85" alt="Invisalign treatment" />
+          <div class="showcase__caption">
+            <span class="gold">Orthodontics</span>
+            <p>Clear aligners and braces that straighten smiles discreetly and effectively.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Arrows -->
+      <button class="showcase__arrow showcase__arrow--left" id="showcasePrev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="showcase__arrow showcase__arrow--right" id="showcaseNext">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <!-- Dots -->
+      <div class="showcase__dots" id="showcaseDots"></div>
     </div>
   </section>
 
@@ -153,7 +274,7 @@
 
         <div class="step-card fade-up">
           <div class="step-card__number">02</div>
-          <div class="step-card__icon"><i class="fas fa-search"></i></div>
+          <div class="step-card__icon"><i class="fas fa-magnifying-glass"></i></div>
           <h3>Examination & Diagnosis</h3>
           <p>Our specialists conduct a comprehensive examination using digital X-rays and 3D imaging to understand your needs.</p>
         </div>
@@ -177,6 +298,22 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY CTA BANNER -->
+  <section class="emergency-banner">
+    <div class="container emergency-banner__inner">
+      <div class="emergency-banner__left">
+        <i class="fas fa-bolt"></i>
+        <div>
+          <h3>Dental Emergency?</h3>
+          <p>We have same-day slots reserved for urgent cases. Don't wait — call us now.</p>
+        </div>
+      </div>
+      <a href="tel:+15551234567" class="btn btn--gold">
+        <i class="fas fa-phone"></i> Call +1 (555) 123-4567
+      </a>
     </div>
   </section>
 
@@ -392,54 +529,216 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
+  <!-- TESTIMONIALS SLIDER -->
   <section class="testimonials section" id="testimonials">
     <div class="container">
       <div class="section__header fade-up">
         <span class="section__tag">Patient Stories</span>
         <h2 class="section__title">What Our <span class="gold">Patients</span> Say</h2>
+        <p class="section__sub">Thousands of patients trust Dentique for gentle, expert care and beautiful smiles.</p>
       </div>
-      <div class="testimonials__grid">
-        <div class="testimonial-card fade-up">
-          <div class="testimonial-card__stars">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p>"Dentique completely transformed my smile. The veneers look so natural and the entire process was seamless. I couldn't be happier!"</p>
+    </div>
+    <div class="testi__slider-wrap fade-up">
+      <div class="testi__fade testi__fade--left"></div>
+      <div class="testi__fade testi__fade--right"></div>
+      <div class="testi__track" id="testiTrack">
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Dentique transformed my smile completely. The veneers look so natural — I'm obsessed!"</p>
           <div class="testimonial-card__author">
             <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sarah M." class="author__photo" />
-            <div>
-              <strong>Sarah M.</strong>
-              <span>Cosmetic Patient</span>
-            </div>
+            <div><strong>Sarah M.</strong><span>Cosmetic Patient</span></div>
           </div>
         </div>
-        <div class="testimonial-card fade-up">
-          <div class="testimonial-card__stars">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p>"I had extreme dental anxiety but the team at Dentique made me feel completely at ease. Best dental experience I've ever had."</p>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"They completely eased my dental anxiety. Best experience I've ever had at a dentist!"</p>
           <div class="testimonial-card__author">
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="James R." class="author__photo" />
-            <div>
-              <strong>James R.</strong>
-              <span>General Patient</span>
-            </div>
+            <div><strong>James R.</strong><span>General Patient</span></div>
           </div>
         </div>
-        <div class="testimonial-card fade-up">
-          <div class="testimonial-card__stars">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p>"My implants look and feel just like real teeth. The results exceeded my expectations. Dentique is truly world-class."</p>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"My implants feel just like real teeth. Truly world-class results — exceeded every expectation."</p>
           <div class="testimonial-card__author">
             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Ana L." class="author__photo" />
-            <div>
-              <strong>Ana L.</strong>
-              <span>Implant Patient</span>
-            </div>
+            <div><strong>Ana L.</strong><span>Implant Patient</span></div>
           </div>
         </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Gentle, professional, and thorough. The staff made me feel at home from the very first visit."</p>
+          <div class="testimonial-card__author">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Michael S." class="author__photo" />
+            <div><strong>Michael S.</strong><span>General Patient</span></div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Our whole family comes here. Exceptional service every single time — they really go the extra mile."</p>
+          <div class="testimonial-card__author">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Robert L." class="author__photo" />
+            <div><strong>Robert L.</strong><span>Family Patient</span></div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"One whitening session and my confidence skyrocketed. The results were absolutely stunning."</p>
+          <div class="testimonial-card__author">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80" alt="Jake M." class="author__photo" />
+            <div><strong>Jake M.</strong><span>Whitening Patient</span></div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Luxury experience from start to finish. My smile has honestly never looked better."</p>
+          <div class="testimonial-card__author">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80" alt="Lisa T." class="author__photo" />
+            <div><strong>Lisa T.</strong><span>Cosmetic Patient</span></div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Fixed my chipped tooth in under an hour — quick, painless, and perfectly matched. Impressed!"</p>
+          <div class="testimonial-card__author">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80" alt="Chris D." class="author__photo" />
+            <div><strong>Chris D.</strong><span>Emergency Patient</span></div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Finally a dentist I actually look forward to visiting. The warmth of the team is unmatched."</p>
+          <div class="testimonial-card__author">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80" alt="Maria G." class="author__photo" />
+            <div><strong>Maria G.</strong><span>General Patient</span></div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"The 3D imaging technology blew me away. So precise — and the results absolutely speak for themselves."</p>
+          <div class="testimonial-card__author">
+            <img src="https://images.unsplash.com/photo-1463453091185-61582044d556?w=100&q=80" alt="David K." class="author__photo" />
+            <div><strong>David K.</strong><span>Implant Patient</span></div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"My Invisalign results are perfect. Clear, comfortable, and the team guided me every step."</p>
+          <div class="testimonial-card__author">
+            <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=100&q=80" alt="Emma W." class="author__photo" />
+            <div><strong>Emma W.</strong><span>Orthodontic Patient</span></div>
+          </div>
+        </div>
+
       </div>
+      <button class="testi__btn testi__btn--left" id="testiPrev"><i class="fas fa-chevron-left"></i></button>
+      <button class="testi__btn testi__btn--right" id="testiNext"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </section>
+
+  <!-- BEFORE & AFTER -->
+  <section class="beforeafter section" id="beforeafter">
+    <div class="container">
+      <div class="section__header fade-up">
+        <span class="section__tag">Transformations</span>
+        <h2 class="section__title">Before & <span class="gold">After</span></h2>
+        <p class="section__sub">Drag the handle to reveal the transformation. Replace with real patient photos anytime.</p>
+      </div>
+      <div class="ba__grid">
+
+        <div class="ba__card fade-up">
+          <div class="ba__compare" id="ba1">
+            <div class="ba__after">
+              <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=700&q=85" alt="After" />
+              <span class="ba__tag ba__tag--after">After</span>
+            </div>
+            <div class="ba__before" id="ba1Before">
+              <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=700&q=85" alt="Before" class="ba__before-img" />
+              <span class="ba__tag ba__tag--before">Before</span>
+            </div>
+            <div class="ba__handle" id="ba1Handle">
+              <div class="ba__handle-line"></div>
+              <div class="ba__handle-btn"><i class="fas fa-arrows-left-right"></i></div>
+              <div class="ba__handle-line"></div>
+            </div>
+          </div>
+          <div class="ba__info"><h4>Teeth Whitening</h4><p>6 shades brighter in a single session</p></div>
+        </div>
+
+        <div class="ba__card fade-up">
+          <div class="ba__compare" id="ba2">
+            <div class="ba__after">
+              <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=700&q=85" alt="After" />
+              <span class="ba__tag ba__tag--after">After</span>
+            </div>
+            <div class="ba__before" id="ba2Before">
+              <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=700&q=85" alt="Before" class="ba__before-img" />
+              <span class="ba__tag ba__tag--before">Before</span>
+            </div>
+            <div class="ba__handle" id="ba2Handle">
+              <div class="ba__handle-line"></div>
+              <div class="ba__handle-btn"><i class="fas fa-arrows-left-right"></i></div>
+              <div class="ba__handle-line"></div>
+            </div>
+          </div>
+          <div class="ba__info"><h4>Porcelain Veneers</h4><p>Complete smile makeover with custom veneers</p></div>
+        </div>
+
+        <div class="ba__card fade-up">
+          <div class="ba__compare" id="ba3">
+            <div class="ba__after">
+              <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=700&q=85" alt="After" />
+              <span class="ba__tag ba__tag--after">After</span>
+            </div>
+            <div class="ba__before" id="ba3Before">
+              <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=700&q=85" alt="Before" class="ba__before-img" />
+              <span class="ba__tag ba__tag--before">Before</span>
+            </div>
+            <div class="ba__handle" id="ba3Handle">
+              <div class="ba__handle-line"></div>
+              <div class="ba__handle-btn"><i class="fas fa-arrows-left-right"></i></div>
+              <div class="ba__handle-line"></div>
+            </div>
+          </div>
+          <div class="ba__info"><h4>Orthodontic Treatment</h4><p>Perfectly aligned smile with clear aligners</p></div>
+        </div>
+
+      </div>
+      <p class="ba__note fade-up"><i class="fas fa-info-circle gold"></i> Sample images — replace with real patient before &amp; after photos for best results.</p>
+    </div>
+  </section>
+
+  <!-- INSURANCE -->
+  <section class="insurance section" id="insurance">
+    <div class="container">
+      <div class="section__header fade-up">
+        <span class="section__tag">Accepted Insurance</span>
+        <h2 class="section__title">We Accept Most <span class="gold">Insurance Plans</span></h2>
+        <p class="section__sub">We work with all major providers to make dental care accessible and affordable for everyone.</p>
+      </div>
+      <div class="insurance__grid fade-up">
+        <div class="insurance__card"><i class="fas fa-shield-alt gold"></i><span>Delta Dental</span></div>
+        <div class="insurance__card"><i class="fas fa-shield-alt gold"></i><span>Cigna</span></div>
+        <div class="insurance__card"><i class="fas fa-shield-alt gold"></i><span>Aetna</span></div>
+        <div class="insurance__card"><i class="fas fa-shield-alt gold"></i><span>MetLife</span></div>
+        <div class="insurance__card"><i class="fas fa-shield-alt gold"></i><span>United Healthcare</span></div>
+        <div class="insurance__card"><i class="fas fa-shield-alt gold"></i><span>BlueCross BlueShield</span></div>
+        <div class="insurance__card"><i class="fas fa-shield-alt gold"></i><span>Guardian</span></div>
+        <div class="insurance__card"><i class="fas fa-shield-alt gold"></i><span>Humana</span></div>
+      </div>
+      <p class="insurance__note fade-up">Don't see your provider? <a href="#contact" class="gold">Contact us</a> — we likely accept it or offer flexible self-pay options.</p>
     </div>
   </section>
 
@@ -593,6 +892,7 @@
           <li><a href="#services">Cosmetic Dentistry</a></li>
           <li><a href="#services">Orthodontics</a></li>
           <li><a href="#services">Dental Implants</a></li>
+          <li><a href="#services">Emergency Care</a></li>
         </ul>
       </div>
       <div class="footer__links">

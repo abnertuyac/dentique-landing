@@ -63,37 +63,142 @@ const statObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 statNums.forEach(el => statObserver.observe(el));
 
-// ===== BEFORE/AFTER SLIDER =====
-function initCompare(wrapperId, beforeId, handleId) {
-  const wrapper = document.getElementById(wrapperId);
-  const before = document.getElementById(beforeId);
-  const handle = document.getElementById(handleId);
-  if (!wrapper || !before || !handle) return;
 
-  let dragging = false;
+// ===== SHOWCASE GALLERY SLIDER =====
+const slides = document.querySelectorAll('.showcase__slide');
+const dotsContainer = document.getElementById('showcaseDots');
+const prevBtn = document.getElementById('showcasePrev');
+const nextBtn = document.getElementById('showcaseNext');
+let currentSlide = 0;
+let sliderTimer;
 
-  const setPosition = (x) => {
-    const rect = wrapper.getBoundingClientRect();
-    let pct = (x - rect.left) / rect.width;
-    pct = Math.max(0.05, Math.min(0.95, pct));
-    before.style.width = (pct * 100) + '%';
-    handle.style.left = (pct * 100) + '%';
-  };
+// Build dots
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.classList.add('showcase__dot');
+  if (i === 0) dot.classList.add('active');
+  dot.addEventListener('click', () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+});
 
-  handle.addEventListener('mousedown', () => dragging = true);
-  wrapper.addEventListener('mousedown', (e) => { dragging = true; setPosition(e.clientX); });
-  window.addEventListener('mousemove', (e) => { if (dragging) setPosition(e.clientX); });
-  window.addEventListener('mouseup', () => dragging = false);
-
-  handle.addEventListener('touchstart', () => dragging = true, { passive: true });
-  wrapper.addEventListener('touchstart', (e) => { dragging = true; setPosition(e.touches[0].clientX); }, { passive: true });
-  window.addEventListener('touchmove', (e) => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
-  window.addEventListener('touchend', () => dragging = false);
+function goToSlide(index) {
+  slides[currentSlide].classList.remove('active');
+  dotsContainer.children[currentSlide].classList.remove('active');
+  currentSlide = (index + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dotsContainer.children[currentSlide].classList.add('active');
+  resetTimer();
 }
 
-initCompare('compare1', 'before1', 'handle1');
-initCompare('compare2', 'before2', 'handle2');
-initCompare('compare3', 'before3', 'handle3');
+function resetTimer() {
+  clearInterval(sliderTimer);
+  sliderTimer = setInterval(() => goToSlide(currentSlide + 1), 4500);
+}
+
+// Show first slide
+slides[0].classList.add('active');
+prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+resetTimer();
+
+// ===== TESTIMONIAL INFINITE SLIDER =====
+const testiTrack   = document.getElementById('testiTrack');
+const testiPrevBtn = document.getElementById('testiPrev');
+const testiNextBtn = document.getElementById('testiNext');
+const CARD_W       = 280 + 24; // card width + gap
+const origCards    = Array.from(testiTrack.querySelectorAll('.testimonial-card'));
+const ORIG_COUNT   = origCards.length;
+
+// Clone all cards and append — enables seamless forward loop
+origCards.forEach(c => testiTrack.appendChild(c.cloneNode(true)));
+
+let tIdx = 0;
+let tBusy = false;
+
+const setPos = (idx, animate) => {
+  testiTrack.style.transition = animate ? 'transform 0.5s cubic-bezier(0.4,0,0.2,1)' : 'none';
+  testiTrack.style.transform  = `translateX(-${idx * CARD_W}px)`;
+};
+
+const goNext = () => {
+  if (tBusy) return;
+  tBusy = true;
+  tIdx++;
+  setPos(tIdx, true);
+};
+
+const goPrev = () => {
+  if (tBusy) return;
+  tBusy = true;
+  if (tIdx === 0) {
+    // Jump silently to clone position then slide back
+    setPos(ORIG_COUNT, false);
+    testiTrack.offsetHeight; // force reflow
+    tIdx = ORIG_COUNT - 1;
+    setTimeout(() => { setPos(tIdx, true); }, 20);
+  } else {
+    tIdx--;
+    setPos(tIdx, true);
+  }
+};
+
+// After animation: if we've slid into clones, silently reset to originals
+testiTrack.addEventListener('transitionend', () => {
+  if (tIdx >= ORIG_COUNT) {
+    tIdx -= ORIG_COUNT;
+    setPos(tIdx, false);
+    testiTrack.offsetHeight;
+  }
+  tBusy = false;
+});
+
+testiNextBtn.addEventListener('click', goNext);
+testiPrevBtn.addEventListener('click', goPrev);
+
+let testiTimer = setInterval(goNext, 4000);
+const resetTimer = () => { clearInterval(testiTimer); testiTimer = setInterval(goNext, 4000); };
+testiNextBtn.addEventListener('click', resetTimer);
+testiPrevBtn.addEventListener('click', resetTimer);
+
+// ===== BEFORE & AFTER DRAG COMPARE =====
+function initBA(wrapperId, beforeId, handleId) {
+  const wrapper = document.getElementById(wrapperId);
+  const before  = document.getElementById(beforeId);
+  const handle  = document.getElementById(handleId);
+  if (!wrapper || !before || !handle) return;
+
+  const img = before.querySelector('.ba__before-img');
+  let dragging = false;
+
+  // Always keep before-image pixel width = wrapper width so it never squishes
+  const syncImgWidth = () => {
+    if (img) img.style.width = wrapper.offsetWidth + 'px';
+  };
+  syncImgWidth();
+  window.addEventListener('resize', syncImgWidth);
+
+  const move = (clientX) => {
+    const rect = wrapper.getBoundingClientRect();
+    let pct = (clientX - rect.left) / rect.width;
+    pct = Math.max(0.04, Math.min(0.96, pct));
+    before.style.width = (pct * 100) + '%';
+    handle.style.left  = (pct * 100) + '%';
+    syncImgWidth();
+  };
+
+  // Only the handle starts the drag (not the whole image)
+  handle.addEventListener('mousedown',  (e) => { e.preventDefault(); dragging = true; });
+  window.addEventListener('mousemove',  (e) => { if (dragging) move(e.clientX); });
+  window.addEventListener('mouseup',    ()  => { dragging = false; });
+
+  handle.addEventListener('touchstart', (e) => { dragging = true; }, { passive: true });
+  window.addEventListener('touchmove',  (e) => { if (dragging) { e.preventDefault(); move(e.touches[0].clientX); } }, { passive: false });
+  window.addEventListener('touchend',   ()  => { dragging = false; });
+}
+
+initBA('ba1', 'ba1Before', 'ba1Handle');
+initBA('ba2', 'ba2Before', 'ba2Handle');
+initBA('ba3', 'ba3Before', 'ba3Handle');
 
 // ===== FAQ ACCORDION =====
 document.querySelectorAll('.faq-item__question').forEach(btn => {
