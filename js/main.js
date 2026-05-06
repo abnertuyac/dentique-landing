@@ -47,7 +47,6 @@ const statObserver = new IntersectionObserver((entries) => {
       const el = entry.target;
       const target = parseInt(el.dataset.target);
       const suffix = el.dataset.suffix || '';
-      let start = 0;
       const duration = 1800;
       const startTime = performance.now();
       const tick = (now) => {
@@ -70,16 +69,7 @@ const dotsContainer = document.getElementById('showcaseDots');
 const prevBtn = document.getElementById('showcasePrev');
 const nextBtn = document.getElementById('showcaseNext');
 let currentSlide = 0;
-let sliderTimer;
-
-// Build dots
-slides.forEach((_, i) => {
-  const dot = document.createElement('button');
-  dot.classList.add('showcase__dot');
-  if (i === 0) dot.classList.add('active');
-  dot.addEventListener('click', () => goToSlide(i));
-  dotsContainer.appendChild(dot);
-});
+let showcaseTimer;
 
 function goToSlide(index) {
   slides[currentSlide].classList.remove('active');
@@ -87,78 +77,93 @@ function goToSlide(index) {
   currentSlide = (index + slides.length) % slides.length;
   slides[currentSlide].classList.add('active');
   dotsContainer.children[currentSlide].classList.add('active');
-  resetTimer();
+  resetShowcaseTimer();
 }
 
-function resetTimer() {
-  clearInterval(sliderTimer);
-  sliderTimer = setInterval(() => goToSlide(currentSlide + 1), 4500);
+function resetShowcaseTimer() {
+  clearInterval(showcaseTimer);
+  showcaseTimer = setInterval(() => goToSlide(currentSlide + 1), 4500);
 }
 
-// Show first slide
-slides[0].classList.add('active');
-prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
-resetTimer();
+if (slides.length > 0 && dotsContainer) {
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.classList.add('showcase__dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  slides[0].classList.add('active');
+  if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+  resetShowcaseTimer();
+}
+
 
 // ===== TESTIMONIAL INFINITE SLIDER =====
 const testiTrack   = document.getElementById('testiTrack');
 const testiPrevBtn = document.getElementById('testiPrev');
 const testiNextBtn = document.getElementById('testiNext');
-const CARD_W       = 280 + 24; // card width + gap
-const origCards    = Array.from(testiTrack.querySelectorAll('.testimonial-card'));
-const ORIG_COUNT   = origCards.length;
 
-// Clone all cards and append — enables seamless forward loop
-origCards.forEach(c => testiTrack.appendChild(c.cloneNode(true)));
+if (testiTrack && testiPrevBtn && testiNextBtn) {
+  const CARD_W     = 280 + 24; // card width + gap
+  const origCards  = Array.from(testiTrack.querySelectorAll('.testimonial-card'));
+  const ORIG_COUNT = origCards.length;
 
-let tIdx = 0;
-let tBusy = false;
+  // Clone all cards and append — enables seamless forward loop
+  origCards.forEach(c => testiTrack.appendChild(c.cloneNode(true)));
 
-const setPos = (idx, animate) => {
-  testiTrack.style.transition = animate ? 'transform 0.5s cubic-bezier(0.4,0,0.2,1)' : 'none';
-  testiTrack.style.transform  = `translateX(-${idx * CARD_W}px)`;
-};
+  let tIdx = 0;
+  let tBusy = false;
 
-const goNext = () => {
-  if (tBusy) return;
-  tBusy = true;
-  tIdx++;
-  setPos(tIdx, true);
-};
+  const setPos = (idx, animate) => {
+    testiTrack.style.transition = animate ? 'transform 0.5s cubic-bezier(0.4,0,0.2,1)' : 'none';
+    testiTrack.style.transform  = `translateX(-${idx * CARD_W}px)`;
+  };
 
-const goPrev = () => {
-  if (tBusy) return;
-  tBusy = true;
-  if (tIdx === 0) {
-    // Jump silently to clone position then slide back
-    setPos(ORIG_COUNT, false);
-    testiTrack.offsetHeight; // force reflow
-    tIdx = ORIG_COUNT - 1;
-    setTimeout(() => { setPos(tIdx, true); }, 20);
-  } else {
-    tIdx--;
+  const goNext = () => {
+    if (tBusy) return;
+    tBusy = true;
+    tIdx++;
     setPos(tIdx, true);
-  }
-};
+  };
 
-// After animation: if we've slid into clones, silently reset to originals
-testiTrack.addEventListener('transitionend', () => {
-  if (tIdx >= ORIG_COUNT) {
-    tIdx -= ORIG_COUNT;
-    setPos(tIdx, false);
-    testiTrack.offsetHeight;
-  }
-  tBusy = false;
-});
+  const goPrev = () => {
+    if (tBusy) return;
+    tBusy = true;
+    if (tIdx === 0) {
+      // Jump silently to clone position then slide back
+      setPos(ORIG_COUNT, false);
+      testiTrack.offsetHeight; // force reflow
+      tIdx = ORIG_COUNT - 1;
+      setTimeout(() => { setPos(tIdx, true); }, 20);
+    } else {
+      tIdx--;
+      setPos(tIdx, true);
+    }
+  };
 
-testiNextBtn.addEventListener('click', goNext);
-testiPrevBtn.addEventListener('click', goPrev);
+  // After animation: if we've slid into clones, silently reset to originals
+  testiTrack.addEventListener('transitionend', () => {
+    if (tIdx >= ORIG_COUNT) {
+      tIdx -= ORIG_COUNT;
+      setPos(tIdx, false);
+      testiTrack.offsetHeight;
+    }
+    tBusy = false;
+  });
 
-let testiTimer = setInterval(goNext, 4000);
-const resetTimer = () => { clearInterval(testiTimer); testiTimer = setInterval(goNext, 4000); };
-testiNextBtn.addEventListener('click', resetTimer);
-testiPrevBtn.addEventListener('click', resetTimer);
+  testiNextBtn.addEventListener('click', goNext);
+  testiPrevBtn.addEventListener('click', goPrev);
+
+  let testiTimer = setInterval(goNext, 4000);
+  const resetTestiTimer = () => { clearInterval(testiTimer); testiTimer = setInterval(goNext, 4000); };
+  testiNextBtn.addEventListener('click', resetTestiTimer);
+  testiPrevBtn.addEventListener('click', resetTestiTimer);
+}
+
 
 // ===== BEFORE & AFTER DRAG COMPARE =====
 function initBA(wrapperId, beforeId, handleId) {
@@ -191,7 +196,7 @@ function initBA(wrapperId, beforeId, handleId) {
   window.addEventListener('mousemove',  (e) => { if (dragging) move(e.clientX); });
   window.addEventListener('mouseup',    ()  => { dragging = false; });
 
-  handle.addEventListener('touchstart', (e) => { dragging = true; }, { passive: true });
+  handle.addEventListener('touchstart', () => { dragging = true; }, { passive: true });
   window.addEventListener('touchmove',  (e) => { if (dragging) { e.preventDefault(); move(e.touches[0].clientX); } }, { passive: false });
   window.addEventListener('touchend',   ()  => { dragging = false; });
 }
@@ -213,64 +218,68 @@ document.querySelectorAll('.faq-item__question').forEach(btn => {
 // ===== CONTACT FORM =====
 const form = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const btn = form.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = 'Send Message';
-    btn.disabled = false;
-    formSuccess.classList.add('show');
-    form.reset();
-    setTimeout(() => formSuccess.classList.remove('show'), 4000);
-  }, 1200);
-});
+if (form && formSuccess) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      formSuccess.classList.add('show');
+      form.reset();
+      setTimeout(() => formSuccess.classList.remove('show'), 4000);
+    }, 1200);
+  });
+}
 
 // ===== GOLD PARTICLES =====
 const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let particles = [];
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  let particles = [];
 
-const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
-resize();
-window.addEventListener('resize', resize);
+  const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
+  resize();
+  window.addEventListener('resize', resize);
 
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 1.5 + 0.3;
-    this.speedX = (Math.random() - 0.5) * 0.3;
-    this.speedY = (Math.random() - 0.5) * 0.3;
-    this.opacity = Math.random() * 0.4 + 0.1;
-    this.life = 0;
-    this.maxLife = Math.random() * 200 + 100;
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 1.5 + 0.3;
+      this.speedX = (Math.random() - 0.5) * 0.3;
+      this.speedY = (Math.random() - 0.5) * 0.3;
+      this.opacity = Math.random() * 0.4 + 0.1;
+      this.life = 0;
+      this.maxLife = Math.random() * 200 + 100;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.life++;
+      if (this.life > this.maxLife) this.reset();
+    }
+    draw() {
+      const fade = this.life < 20 ? this.life / 20 : this.life > this.maxLife - 20 ? (this.maxLife - this.life) / 20 : 1;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201, 168, 76, ${this.opacity * fade})`;
+      ctx.fill();
+    }
   }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    this.life++;
-    if (this.life > this.maxLife) this.reset();
-  }
-  draw() {
-    const fade = this.life < 20 ? this.life / 20 : this.life > this.maxLife - 20 ? (this.maxLife - this.life) / 20 : 1;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(201, 168, 76, ${this.opacity * fade})`;
-    ctx.fill();
-  }
+
+  for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+  const animateParticles = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animateParticles);
+  };
+  animateParticles();
 }
-
-for (let i = 0; i < 80; i++) particles.push(new Particle());
-
-const animateParticles = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(animateParticles);
-};
-animateParticles();
 
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(link => {
