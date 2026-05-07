@@ -108,9 +108,16 @@ const testiPrevBtn = document.getElementById('testiPrev');
 const testiNextBtn = document.getElementById('testiNext');
 
 if (testiTrack && testiPrevBtn && testiNextBtn) {
-  const CARD_W     = 280 + 24; // card width + gap
   const origCards  = Array.from(testiTrack.querySelectorAll('.testimonial-card'));
   const ORIG_COUNT = origCards.length;
+  // Read actual rendered card width so it adapts to responsive CSS
+  const gap = parseInt(getComputedStyle(testiTrack).gap) || 24;
+  let CARD_W = (origCards[0]?.offsetWidth || 260) + gap;
+  // Recompute on resize so slider stays aligned
+  window.addEventListener('resize', () => {
+    CARD_W = (origCards[0]?.offsetWidth || 260) + (parseInt(getComputedStyle(testiTrack).gap) || 24);
+    setPos(tIdx, false);
+  });
 
   // Clone all cards and append — enables seamless forward loop
   origCards.forEach(c => testiTrack.appendChild(c.cloneNode(true)));

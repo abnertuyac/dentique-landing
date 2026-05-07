@@ -784,7 +784,7 @@ input, select, textarea, button { font-family: inherit; }
 
 /* ===== BACK TO TOP ===== */
 .back-to-top {
-  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  position: fixed; bottom: 96px; right: 32px; width: 44px; height: 44px;
   background: var(--gold); color: var(--dark); border: none; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 0.9rem; cursor: pointer; z-index: 100;
@@ -822,9 +822,9 @@ input, select, textarea, button { font-family: inherit; }
   .stats__grid { grid-template-columns: repeat(2,1fr); }
   .services__grid { grid-template-columns: 1fr; }
   .steps__grid { grid-template-columns: 1fr; gap: 28px; }
-  .testi__track { padding: 16px 60px; }
-  .testi__fade { width: 60px; }
-  .testimonial-card { min-width: 280px; }
+  .testi__track { padding: 16px 32px; }
+  .testi__fade { width: 32px; }
+  .testimonial-card { min-width: 260px; max-width: 260px; }
   .ba__grid { grid-template-columns: 1fr; }
   .about__grid { grid-template-columns: 1fr; gap: 60px; }
   .about__badge { right: 0; }
@@ -841,9 +841,28 @@ input, select, textarea, button { font-family: inherit; }
   .stats__grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
   .why-us__grid { grid-template-columns: 1fr; }
   .team__grid { grid-template-columns: 1fr; }
-  .hero__title { font-size: 2.8rem; }
+  .hero__title { font-size: 2.4rem; }
   .footer__grid { grid-template-columns: 1fr; }
-  .back-to-top { bottom: 20px; right: 20px; }
+  .back-to-top { bottom: 90px; right: 16px; }
+  /* Testimonial: fit card in mobile viewport */
+  .testi__track { padding: 16px 20px; }
+  .testi__fade { width: 20px; }
+  .testimonial-card { min-width: calc(100vw - 80px); max-width: calc(100vw - 80px); }
+  /* Chatbot: fit in mobile screen */
+  .chatbot { bottom: 16px; right: 16px; }
+  .chatbot__window { width: calc(100vw - 32px); right: 0; }
+  .chatbot__messages { max-height: 220px; }
+  .chatbot__bubble { width: 48px; height: 48px; font-size: 1.1rem; }
+  /* Theme switcher: mobile spacing */
+  .theme-switcher { bottom: 90px; left: 16px; }
+  .theme-panel { width: 190px; }
+  /* Offers grid: single column on small screens */
+  .offers__grid { grid-template-columns: 1fr; }
+  /* Countdown bar: wrap nicely */
+  .offers__countdown-bar { flex-direction: column; gap: 12px; text-align: center; }
+  .countdown { gap: 4px; }
+  .countdown__unit { min-width: 50px; padding: 7px 10px; }
+  .countdown__unit span { font-size: 1.2rem; }
 }
 
 /* ===== THEME SWITCHER ===== */
