@@ -994,3 +994,25 @@ input, select, textarea, button { font-family: inherit; }
 .typing-bubble span:nth-child(3) { animation-delay: 0.4s; }
 @keyframes typingDot { 0%,60%,100% { opacity: 0.25; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-4px); } }
 @keyframes chatPop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== MOBILE OVERRIDES (must come last to beat fixed-position base styles) ===== */
+@media (max-width: 480px) {
+  /* Chatbot — keep within screen bounds */
+  .chatbot { bottom: 16px; right: 16px; }
+  .chatbot__window { width: calc(100vw - 32px); right: 0; max-height: 420px; }
+  .chatbot__messages { max-height: 210px; }
+  .chatbot__bubble { width: 48px; height: 48px; font-size: 1.1rem; }
+  /* Theme switcher — clear of chatbot */
+  .theme-switcher { bottom: 82px; left: 16px; }
+  .theme-panel { width: 186px; padding: 14px; }
+  .theme-option { padding: 8px 10px; }
+  /* Hero adjustments */
+  .hero__actions { flex-direction: column; gap: 12px; }
+  .hero__actions .btn { width: 100%; text-align: center; }
+  /* Showcase caption font */
+  .showcase__caption p { font-size: 0.82rem; }
+  /* Section padding tighter */
+  .section { padding: 60px 0; }
+  /* Nav logo smaller */
+  .nav__logo { font-size: 1.3rem; }
+}
